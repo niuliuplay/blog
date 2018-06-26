@@ -7,6 +7,7 @@ import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
@@ -16,21 +17,21 @@ import org.springframework.stereotype.Service;
 public class LoggerAdvice {
 	
 //	private Logger logger = Logger.getLogger(this.getClass());
-	private org.slf4j.Logger logger = LoggerFactory.getLogger(LoggerAdvice.class);
+	private Logger logger = LoggerFactory.getLogger(LoggerAdvice.class);
 
-	@Before("within(com.ecut..*) && @annotation(loggerManage)")
+	@Before("within(com.niuliuplay.*) && @annotation(loggerManage)")
 	public void addBeforeLogger(JoinPoint joinPoint, LoggerManage loggerManage) {
 		logger.info("执行 " + loggerManage.description() + " 开始");
 		logger.info(joinPoint.getSignature().toString());
 		logger.info(parseParames(joinPoint.getArgs()));
 	}
 	
-	@AfterReturning("within(com.ecut..*) && @annotation(loggerManage)")
+	@AfterReturning("within(com.niuliuplay..*) && @annotation(loggerManage)")
 	public void addAfterReturningLogger(JoinPoint joinPoint, LoggerManage loggerManage) {
 		logger.info("执行 " + loggerManage.description() + " 结束");
 	}
 	
-	@AfterThrowing(pointcut = "within(com.ecut..*) && @annotation(loggerManage)", throwing = "ex")
+	@AfterThrowing(pointcut = "within(com.niuliuplay..*) && @annotation(loggerManage)", throwing = "ex")
 	public void addAfterThrowingLogger(JoinPoint joinPoint, LoggerManage loggerManage, Exception ex) {
 		logger.error("执行 " + loggerManage.description() + " 异常", ex);
 	}
