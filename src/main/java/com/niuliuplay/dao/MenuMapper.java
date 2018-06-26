@@ -1,7 +1,9 @@
 package com.niuliuplay.dao;
 
 import com.niuliuplay.pojo.Menu;
+import org.springframework.stereotype.Component;
 
+@Component
 public interface MenuMapper {
     int deleteByPrimaryKey(Integer id);
 

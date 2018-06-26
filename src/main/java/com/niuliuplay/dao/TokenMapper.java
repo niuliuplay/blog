@@ -1,7 +1,9 @@
 package com.niuliuplay.dao;
 
 import com.niuliuplay.pojo.Token;
+import org.springframework.stereotype.Component;
 
+@Component
 public interface TokenMapper {
     int deleteByPrimaryKey(String id);
 

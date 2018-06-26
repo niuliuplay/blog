@@ -1,7 +1,9 @@
 package com.niuliuplay.dao;
 
 import com.niuliuplay.pojo.RoleMenu;
+import org.springframework.stereotype.Component;
 
+@Component
 public interface RoleMenuMapper {
     int deleteByPrimaryKey(Integer id);
 

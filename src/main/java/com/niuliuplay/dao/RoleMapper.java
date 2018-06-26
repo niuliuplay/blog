@@ -1,7 +1,9 @@
 package com.niuliuplay.dao;
 
 import com.niuliuplay.pojo.Role;
+import org.springframework.stereotype.Component;
 
+@Component
 public interface RoleMapper {
     int deleteByPrimaryKey(Byte id);
 

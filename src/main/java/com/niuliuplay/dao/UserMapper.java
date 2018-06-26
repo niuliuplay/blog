@@ -1,7 +1,9 @@
 package com.niuliuplay.dao;
 
 import com.niuliuplay.pojo.User;
+import org.springframework.stereotype.Component;
 
+@Component
 public interface UserMapper {
     int deleteByPrimaryKey(String id);
 

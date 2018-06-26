@@ -1,7 +1,9 @@
 package com.niuliuplay.dao;
 
 import com.niuliuplay.pojo.ActicleClassify;
+import org.springframework.stereotype.Component;
 
+@Component
 public interface ActicleClassifyMapper {
     int deleteByPrimaryKey(String id);
 

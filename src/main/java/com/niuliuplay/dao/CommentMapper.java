@@ -1,7 +1,9 @@
 package com.niuliuplay.dao;
 
 import com.niuliuplay.pojo.Comment;
+import org.springframework.stereotype.Component;
 
+@Component
 public interface CommentMapper {
     int deleteByPrimaryKey(String id);
 
