@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.niuliuplay.dao.ActicleMapper" >
+  <resultMap id="BaseResultMap" type="com.niuliuplay.pojo.Acticle" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="acticle_name" property="acticleName" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="acticle_type_id" property="acticleTypeId" jdbcType="TINYINT" />
+    <result column="classify_id" property="classifyId" jdbcType="VARCHAR" />
+    <result column="tag" property="tag" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="last_modify_time" property="lastModifyTime" jdbcType="TIMESTAMP" />
+    <result column="open" property="open" jdbcType="TINYINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.niuliuplay.pojo.Acticle" extends="BaseResultMap" >
+    <result column="context" property="context" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, acticle_name, user_id, acticle_type_id, classify_id, tag, create_time, last_modify_time, 
+    `open`
+  </sql>
+  <sql id="Blob_Column_List" >
+    context
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from acticle
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from acticle
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.niuliuplay.pojo.Acticle" >
+    <selectKey resultType="java.lang.String" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into acticle (acticle_name, user_id, acticle_type_id, 
+      classify_id, tag, create_time, 
+      last_modify_time, `open`, context
+      )
+    values (#{acticleName,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{acticleTypeId,jdbcType=TINYINT}, 
+      #{classifyId,jdbcType=VARCHAR}, #{tag,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{lastModifyTime,jdbcType=TIMESTAMP}, #{open,jdbcType=TINYINT}, #{context,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.niuliuplay.pojo.Acticle" >
+    <selectKey resultType="java.lang.String" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into acticle
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="acticleName != null" >
+        acticle_name,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="acticleTypeId != null" >
+        acticle_type_id,
+      </if>
+      <if test="classifyId != null" >
+        classify_id,
+      </if>
+      <if test="tag != null" >
+        tag,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="lastModifyTime != null" >
+        last_modify_time,
+      </if>
+      <if test="open != null" >
+        `open`,
+      </if>
+      <if test="context != null" >
+        context,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="acticleName != null" >
+        #{acticleName,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="acticleTypeId != null" >
+        #{acticleTypeId,jdbcType=TINYINT},
+      </if>
+      <if test="classifyId != null" >
+        #{classifyId,jdbcType=VARCHAR},
+      </if>
+      <if test="tag != null" >
+        #{tag,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifyTime != null" >
+        #{lastModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="open != null" >
+        #{open,jdbcType=TINYINT},
+      </if>
+      <if test="context != null" >
+        #{context,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.niuliuplay.pojo.Acticle" >
+    update acticle
+    <set >
+      <if test="acticleName != null" >
+        acticle_name = #{acticleName,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="acticleTypeId != null" >
+        acticle_type_id = #{acticleTypeId,jdbcType=TINYINT},
+      </if>
+      <if test="classifyId != null" >
+        classify_id = #{classifyId,jdbcType=VARCHAR},
+      </if>
+      <if test="tag != null" >
+        tag = #{tag,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifyTime != null" >
+        last_modify_time = #{lastModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="open != null" >
+        `open` = #{open,jdbcType=TINYINT},
+      </if>
+      <if test="context != null" >
+        context = #{context,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.niuliuplay.pojo.Acticle" >
+    update acticle
+    set acticle_name = #{acticleName,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR},
+      acticle_type_id = #{acticleTypeId,jdbcType=TINYINT},
+      classify_id = #{classifyId,jdbcType=VARCHAR},
+      tag = #{tag,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      last_modify_time = #{lastModifyTime,jdbcType=TIMESTAMP},
+      `open` = #{open,jdbcType=TINYINT},
+      context = #{context,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.niuliuplay.pojo.Acticle" >
+    update acticle
+    set acticle_name = #{acticleName,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR},
+      acticle_type_id = #{acticleTypeId,jdbcType=TINYINT},
+      classify_id = #{classifyId,jdbcType=VARCHAR},
+      tag = #{tag,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      last_modify_time = #{lastModifyTime,jdbcType=TIMESTAMP},
+      `open` = #{open,jdbcType=TINYINT}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

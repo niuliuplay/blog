@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.niuliuplay.dao.CommentMapper" >
+  <resultMap id="BaseResultMap" type="com.niuliuplay.pojo.Comment" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="comment_content" property="commentContent" jdbcType="VARCHAR" />
+    <result column="commentator_id" property="commentatorId" jdbcType="VARCHAR" />
+    <result column="author_id" property="authorId" jdbcType="VARCHAR" />
+    <result column="comment_time" property="commentTime" jdbcType="TIMESTAMP" />
+    <result column="last_modify_time" property="lastModifyTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, comment_content, commentator_id, author_id, comment_time, last_modify_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from comment
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from comment
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.niuliuplay.pojo.Comment" >
+    <selectKey resultType="java.lang.String" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into comment (comment_content, commentator_id, author_id, 
+      comment_time, last_modify_time)
+    values (#{commentContent,jdbcType=VARCHAR}, #{commentatorId,jdbcType=VARCHAR}, #{authorId,jdbcType=VARCHAR}, 
+      #{commentTime,jdbcType=TIMESTAMP}, #{lastModifyTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.niuliuplay.pojo.Comment" >
+    <selectKey resultType="java.lang.String" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into comment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="commentContent != null" >
+        comment_content,
+      </if>
+      <if test="commentatorId != null" >
+        commentator_id,
+      </if>
+      <if test="authorId != null" >
+        author_id,
+      </if>
+      <if test="commentTime != null" >
+        comment_time,
+      </if>
+      <if test="lastModifyTime != null" >
+        last_modify_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="commentContent != null" >
+        #{commentContent,jdbcType=VARCHAR},
+      </if>
+      <if test="commentatorId != null" >
+        #{commentatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="authorId != null" >
+        #{authorId,jdbcType=VARCHAR},
+      </if>
+      <if test="commentTime != null" >
+        #{commentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifyTime != null" >
+        #{lastModifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.niuliuplay.pojo.Comment" >
+    update comment
+    <set >
+      <if test="commentContent != null" >
+        comment_content = #{commentContent,jdbcType=VARCHAR},
+      </if>
+      <if test="commentatorId != null" >
+        commentator_id = #{commentatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="authorId != null" >
+        author_id = #{authorId,jdbcType=VARCHAR},
+      </if>
+      <if test="commentTime != null" >
+        comment_time = #{commentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifyTime != null" >
+        last_modify_time = #{lastModifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.niuliuplay.pojo.Comment" >
+    update comment
+    set comment_content = #{commentContent,jdbcType=VARCHAR},
+      commentator_id = #{commentatorId,jdbcType=VARCHAR},
+      author_id = #{authorId,jdbcType=VARCHAR},
+      comment_time = #{commentTime,jdbcType=TIMESTAMP},
+      last_modify_time = #{lastModifyTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
