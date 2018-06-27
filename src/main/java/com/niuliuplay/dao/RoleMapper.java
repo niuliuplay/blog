@@ -3,6 +3,8 @@ package com.niuliuplay.dao;
 import com.niuliuplay.pojo.Role;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public interface RoleMapper {
     int deleteByPrimaryKey(Byte id);
@@ -16,4 +18,6 @@ public interface RoleMapper {
     int updateByPrimaryKeySelective(Role record);
 
     int updateByPrimaryKey(Role record);
+
+    List<Role> getRoles();
 }

@@ -20,7 +20,16 @@ public class ResultModel<T>  implements Serializable{
     private String code;
     @Getter @Setter
     private T        data;
-
+    public ResultModel(){}
+    public ResultModel(String code,String msg){
+        this.code = code;
+        this.msg = msg;
+    }
+    public ResultModel(String code,String msg,T data ){
+        this.code = code;
+        this.msg = msg;
+        this.data = data;
+    }
     @Override
     public String toString(){
         return "code :"+ code +", msg :"+msg;
