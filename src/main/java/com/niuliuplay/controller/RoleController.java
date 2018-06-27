@@ -21,6 +21,7 @@ import java.util.List;
 public class RoleController {
     @Autowired
     RoleService roleService;
+
     @LoggerManage(description = "获取角色")
     @GetMapping("roles")
     public ResultModel getRoles(int pageNum, int pageSize){
